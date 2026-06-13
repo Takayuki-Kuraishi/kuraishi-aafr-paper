@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.swp
+.DS_Store
+data/
+results/
+figures/
+_note_backup/
+*.bak
+ANALYSIS_NOTE*
+HANDOFF*
