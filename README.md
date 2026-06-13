@@ -11,24 +11,6 @@ A video frame is counted as *aggression-associated* when **ΔI ≥ xₜ** and **
 The AAFR is the percentage of valid frames meeting both criteria, and it correlates with manually
 counted close-contact aggressive actions (lunges + foreleg strikes).
 
-> Numerical results (ρ, CI, p, n, AAFR) are produced by the Python code in this repository and are
-> the single source of truth.
-
----
-
-## Scope of this repository
-
-This repository deposits the code that **defines the AAFR method and reproduces the reported
-correlation**:
-
-1. the video-preprocessing pipeline (video → ΔI; markerless-tracking coordinates → inter-fly distance),
-2. the AAFR computation, and
-3. the validation against manual annotation (Spearman/Pearson correlation and bootstrap 95% CIs).
-
-Figures for the paper were produced separately in R (ggplot2) and only re-checked the Python values;
-that plotting code is not included here. The input datasets are deposited separately (see the paper's
-Data Availability statement).
-
 ---
 
 ## Software environment
@@ -209,8 +191,6 @@ python scripts/compute_aafr.py \
 
 ## Notes
 
-- **Single source of truth.** All reported numbers (ρ, CI, p, n, AAFR) come from the Python code in
-  this repository.
 - **Landmark.** Tracking uses a single landmark, the **thoracic center**, of each fly; the AAFR uses
   only the inter-fly distance, not full posture.
 - **Input data** (per-video brightness and distance CSVs, manual aggression counts) are deposited
