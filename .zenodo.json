@@ -1,0 +1,20 @@
+{
+  "upload_type": "software",
+  "title": "Automated Quantification of Drosophila Male Aggression Using Motion and Inter-fly Distance",
+  "description": "Analysis and preprocessing code for the Aggression-Associated Frame Ratio (AAFR), an automated measure of male-male aggression in Drosophila melanogaster based on frame-to-frame motion (ΔI) and inter-fly distance (Dt). This repository accompanies the paper of the same title.",
+  "access_right": "open",
+  "creators": [
+    { "name": "Hori, Aki", "affiliation": "Faculty of Pharmacy, Kanazawa University, Japan" },
+    { "name": "Koyama, Hiroshi", "affiliation": "National Institute for Basic Biology, Japan" },
+    { "name": "Watanabe, Eiji", "affiliation": "National Institute for Basic Biology, Japan" },
+    { "name": "Kuraishi, Takayuki", "affiliation": "Institute for Frontier Science Initiative, Kanazawa University, Japan" }
+  ],
+  "keywords": [
+    "Drosophila melanogaster",
+    "aggression",
+    "innate behavior",
+    "behavior quantification",
+    "DeepLabCut",
+    "markerless tracking"
+  ]
+}
