@@ -20,6 +20,7 @@ In the study accompanying this code, AAFR showed a positive association with the
 ## Software environment
 
 For step-by-step installation and environment setup instructions, including Docker and DeepLabCut, see [`SETUP.md`](SETUP.md).
+For practical guidance on defining assay regions and cropping raw videos, see [`VIDEO_CROPPING.md`](VIDEO_CROPPING.md).
 
 **Python analysis (image processing, distance, AAFR, statistics).** A Dockerfile pinning the analysis dependencies is provided (`docker/Dockerfile`).
 
