@@ -1,7 +1,7 @@
 {
   "upload_type": "software",
-  "title": "Automated Quantification of Drosophila Male Aggression Using Motion and Inter-fly Distance",
-  "description": "Analysis and preprocessing code for the Aggression-Associated Frame Ratio (AAFR), an automated measure of male-male aggression in Drosophila melanogaster based on frame-to-frame motion (ΔI) and inter-fly distance (Dt). This repository accompanies the paper of the same title.",
+  "title": "Co-occurrence of rapid motion and close proximity as a proxy for Drosophila male aggression",
+  "description": "Analysis and preprocessing code for the Aggression-Associated Frame Ratio (AAFR), a recording-level measure that quantifies the proportion of valid video frames in which high frame-to-frame image change (ΔI) and short inter-fly distance (Dₜ) occur simultaneously in pairs of male Drosophila melanogaster. AAFR does not classify individual behavioral actions. This repository accompanies the manuscript \"Co-occurrence of rapid motion and close proximity as a proxy for Drosophila male aggression\".",
   "access_right": "open",
   "creators": [
     { "name": "Hori, Aki", "affiliation": "Faculty of Pharmacy, Kanazawa University, Japan" },
