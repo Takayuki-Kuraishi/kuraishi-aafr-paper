@@ -47,7 +47,7 @@ For practical guidance on defining assay regions and cropping raw videos, see [`
 
 DeepLabCut is used to obtain coordinates for distance measurement rather than to classify behavior. A tracking model does not need to be retrained simply for every new recording or strain. When animals or imaging conditions differ substantially from those represented in the tracking model, tracking performance should first be verified, with additional labeling or retraining performed if necessary.
 
-All Python analysis steps supplied in this repository are run inside the provided container from the repository root.
+The examples below use the provided container and are shown from the repository root. The pipeline wrapper scripts resolve their companion scripts relative to their own location, so they do not require the repository root to be the current working directory.
 
 ---
 
@@ -137,7 +137,7 @@ aafr_validation_analysis.py       bootstrap_correlation_ci.py
 
 ### B. Frame-to-frame image change ΔI (`pipeline/`, four ordered steps)
 
-Original code by Hiroshi Koyama (NIBB), adapted for this study. Each step reads an input folder and writes an output folder; `run_koyama_analysis_batch.sh` substitutes the actual folder name and runs steps 1→2→3→4 in order.
+Original code by Hiroshi Koyama (NIBB), adapted for this study. Each step reads an input folder and writes an output folder; `run_koyama_analysis_batch.sh` substitutes the actual folder name and runs steps 1→2→3→4 in order. Existing non-empty output directories from steps 1–3 are rejected to prevent mixing new results with stale files. Intermediate and output files are not automatically deleted or reorganized.
 
 1. **`1_RGB_to_B_*.py`** — extract the blue channel to obtain a single-channel grayscale image.
 2. **`2_subtract_byAveImage_*.py`** — compute the stack mean image and calculate the absolute difference between each frame and that static background image. This step emphasizes the flies against the background; it does not itself measure motion.
@@ -154,11 +154,13 @@ Because the binary masks contain values of 0 or 255, ΔI is proportional to the 
 
 DeepLabCut tracks the thoracic center of each fly and produces per-frame coordinate CSVs. The tracking output is then converted to inter-fly distance:
 
-- **`process_csv.py <YYMMDD>`** — reads DLC coordinate CSVs (`skiprows=3`, columns interpreted as `x1, y1, x2, y2`) and calculates
+- **`process_csv.py <YYMMDD>`** (legacy mode) or **`process_csv.py <input_dir> <output_dir>`** — reads DLC coordinate CSVs (`skiprows=3`, columns interpreted as `x1, y1, x2, y2`) and calculates
 
   `Dₜ = √((x2 − x1)² + (y2 − y1)²)`
 
   Results are written to `distance_*.csv` with one row per frame (**N** rows).
+
+- **`process_data.sh <input_csv_dir> [output_dir]`** — runs `process_csv.py` followed by `countrow_csv.py`; if `output_dir` is omitted, `<input_csv_dir>_distance` is used.
 
 - **`countrow_csv.py <dir>`** — reports CSV row counts as a QC helper.
 
@@ -238,11 +240,11 @@ Tracking performance should be assessed for the particular dataset and tracking 
 
 ## Minimal reproduction
 
-1. Build the provided Docker image and run the Python analysis from the repository root.
+1. Build the provided Docker image. The commands below are shown from the repository root for convenience.
 2. Preprocess videos with `run_video_pipeline.sh <input_dir>`.
 3. Generate ΔI with `run_koyama_analysis_batch.sh <frame_folders>`.
 4. Track the thoracic center of each fly using DeepLabCut and export coordinate CSVs.
-5. Generate inter-fly distances with `process_data.sh <YYMMDD>` or `process_csv.py <YYMMDD>`.
+5. Generate inter-fly distances with `process_data.sh <input_csv_dir> [output_dir]` or directly with `process_csv.py <input_dir> <output_dir>`; the legacy `process_csv.py <YYMMDD>` mode is retained for compatibility.
 6. Calculate AAFR with `compute_aafr.py`.
 7. Calculate the association with the manual behavioral reference using `aafr_validation_analysis.py`.
 8. Calculate bootstrap confidence intervals using `bootstrap_correlation_ci.py`.

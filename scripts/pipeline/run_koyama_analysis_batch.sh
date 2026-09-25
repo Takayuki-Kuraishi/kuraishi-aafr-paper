@@ -1,5 +1,7 @@
 #!/bin/bash
+set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Function to print section header
 print_header() {
     echo "================================================================"
@@ -54,16 +56,20 @@ process_folder() {
         
         # Create temporary file with replaced folder name
         print_progress "Creating modified version of ${script}..."
-        sed "s/your_folder_name/${FOLDER_NAME}/g" "$script" > "$temp_script"
+        python3 -c 'import sys; from pathlib import Path; src=Path(sys.argv[1]).read_text(); Path(sys.argv[2]).write_text(src.replace("your_folder_name", sys.argv[3]))' "${SCRIPT_DIR}/${script}" "$temp_script" "$FOLDER_NAME"
         
-        # Run the modified script
+        # Run the modified script and always clean up the temporary file
         print_progress "Executing ${script}..."
-        python3 "$temp_script"
-        
-        # Remove temporary file
-        print_progress "Cleaning up temporary files..."
-        rm "$temp_script"
-        
+        if python3 "$temp_script"; then
+            print_progress "Cleaning up temporary files..."
+            rm -f "$temp_script"
+        else
+            status=$?
+            print_progress "Cleaning up temporary files..."
+            rm -f "$temp_script"
+            return "$status"
+        fi
+
         echo "Step ${CURRENT_STEP} completed successfully!"
         echo ""
     }
@@ -112,49 +118,11 @@ for ((i=0; i<${TOTAL_FOLDERS}; i++)); do
 done
 
 print_header "Complete Analysis Pipeline Finished"
+print_progress "Outputs were left next to their corresponding input folders."
+print_progress "No automatic file organization was performed."
 
-print_header "Organizing Output Files"
-
-# Extract prefix from the first argument pattern
-# Remove trailing wildcard if present
-PREFIX=$(echo "${expanded_folders[0]}" | sed -E 's/^([0-9]+)_.+$/\1_/')
-
-# Create directories if they don't exist
-mkdir -p "${PREFIX}brightness_results"
-mkdir -p "${PREFIX}stack_average"
-
-print_progress "Creating directories with prefix: ${PREFIX}"
-
-# Move files to respective directories
-print_progress "Moving CSV files..."
-mv ${PREFIX}*.csv "${PREFIX}brightness_results/"
-
-print_progress "Moving stack average images..."
-mv ${PREFIX}*_stack_average.png "${PREFIX}stack_average/"
-
-print_header "File Organization Complete"
-print_progress "Files have been organized into their respective directories"
-echo "- CSVs: ${PREFIX}brightness_results/"
-echo "- Stack average images: ${PREFIX}stack_average/"
-
-print_progress "Processed ${TOTAL_FOLDERS} folders successfully"
-
-# Cleanup phase
-print_header "Starting Cleanup Phase"
-print_progress "Removing processed folders while preserving results..."
-
-# Store the pattern used for matching folders
-PATTERN=$1
-
-# Remove all matching directories except the brightness_results directory
-for dir in ${PREFIX}*; do
-    # Skip if it's the brightness_results directory
-    if [ "$dir" != "${PREFIX}brightness_results" ] && [ -d "$dir" ]; then
-        print_progress "Removing directory: $dir"
-        rm -rf "$dir"
-    fi
-done
-
-print_header "Cleanup Complete"
-print_progress "All processed folders have been removed"
-print_progress "Analysis results are preserved in ${PREFIX}brightness_results/"
+# Automatic cleanup is intentionally disabled.
+# Input and intermediate directories are preserved by default.
+print_header "Analysis Finished"
+print_progress "No input or intermediate directories were removed."
+print_progress "Review the outputs before deleting intermediate files manually."

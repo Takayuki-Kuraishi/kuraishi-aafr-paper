@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import glob
 import os
+import sys
 
 # 画像ファイルのパスを取得
 print("	*** Input folder name is your_folder_name_RGB_to_B.\n")
@@ -13,6 +14,10 @@ pic_list = sorted(glob.glob(pics))  # ファイル名の連番順にソート
 # 出力フォルダの作成
 output_folder = 'your_folder_name_subtracted'
 print("	*** Output folder name is "+output_folder+".\n")
+if os.path.isdir(output_folder) and os.listdir(output_folder):
+    print(f"Error: Output folder {output_folder} is not empty.")
+    sys.exit(1)
+
 if not os.path.exists(output_folder):
 	os.makedirs(output_folder)
 

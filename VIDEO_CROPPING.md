@@ -12,42 +12,6 @@ For the AAFR calculation, analysis parameters, and recalibration guidance, see [
 
 ---
 
-## Using an AI assistant to develop a cropping workflow
-
-Video cropping is a task for which an AI assistant can be particularly useful because the basic logic is simple but the details are strongly dependent on the imaging system.
-
-A practical approach is to provide the AI assistant with:
-
-- this entire `VIDEO_CROPPING.md`;
-- one or more representative video frames;
-- the image resolution;
-- the number and arrangement of assay regions;
-- the approximate shape and size of each arena or well;
-- the desired output naming convention; and
-- the operating environment in which the script will run.
-
-You can then ask the AI to help write or adapt a small cropping program for your own setup.
-
-For example:
-
-> I want to crop this multi-arena behavioral video for the AAFR pipeline. I have attached a representative frame and this VIDEO_CROPPING.md. The video resolution is 1920 × 1080 pixels and there are eight circular assay regions. Please help me determine a robust way to define the crop coordinates, preview them visually, and export one video per assay region. Do not batch-process the complete dataset until I have checked the output from a small test.
-
-It is usually better to proceed interactively:
-
-1. inspect one frame;
-2. define or detect candidate regions;
-3. preview the regions;
-4. correct mistakes;
-5. crop one test video;
-6. inspect the cropped output;
-7. only then automate the full dataset.
-
-When asking an AI assistant for help, provide the complete error message and the relevant script section if something fails.
-
-AI-generated code should be inspected before execution, particularly when it contains commands that delete, overwrite, rename, or move large numbers of files.
-
----
-
 # 1. Purpose of the cropping step
 
 A raw recording may contain several assay regions in the same camera image.

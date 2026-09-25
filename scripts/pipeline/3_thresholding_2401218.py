@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 import glob
 import os
+import sys
 
 # 2値化の閾値の設定　＝　ユーザーが指定する。
 threshold = 50
@@ -22,6 +23,10 @@ pic_list = sorted(glob.glob(pics))  # ソートを明示的に追加
 # 出力フォルダ名
 output_folder = 'your_folder_name_binary_images'
 print("	*** Output folder name is "+output_folder+".\n")
+if os.path.isdir(output_folder) and os.listdir(output_folder):
+    print(f"Error: Output folder {output_folder} is not empty.")
+    sys.exit(1)
+
 if not os.path.exists(output_folder):
 	os.makedirs(output_folder)
 

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 echo "動画処理パイプライン開始: $(date)"
 
@@ -29,8 +32,8 @@ check_python_script() {
 # メイン処理
 main() {
     local input_dir="$1"
-    local chamber_script="video_processor.py"
-    local frame_script="frame_extractor.py"
+    local chamber_script="${SCRIPT_DIR}/video_processor.py"
+    local frame_script="${SCRIPT_DIR}/frame_extractor.py"
 
     # 入力ディレクトリの確認
     check_input_directory "$input_dir"

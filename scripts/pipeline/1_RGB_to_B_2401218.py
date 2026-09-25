@@ -7,12 +7,17 @@
 
 import cv2
 import os
+import sys
 
 # 入力画像のフォルダパスと出力画像のフォルダパスを指定
 input_folder = "your_folder_name"
 print("	*** Input folder name is " + input_folder + ".\n")
 
 output_folder = "your_folder_name_RGB_to_B"
+
+if os.path.isdir(output_folder) and os.listdir(output_folder):
+    print(f"Error: Output folder {output_folder} is not empty.")
+    sys.exit(1)
 
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)

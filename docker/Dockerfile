@@ -27,6 +27,7 @@ RUN pip install --no-cache-dir \
         pandas==2.2.2 \
         scipy==1.15.3 \
         matplotlib==3.9.0 \
+        tqdm==4.66.4 \
         opencv-python-headless==4.8.1.78
 
 WORKDIR /work
