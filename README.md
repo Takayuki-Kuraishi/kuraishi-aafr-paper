@@ -1,4 +1,4 @@
-# Co-occurrence of rapid motion and close proximity as a proxy for *Drosophila* male aggression — Analysis Code
+# Co-occurrence of rapid motion and short inter-fly distance as a proxy for *Drosophila* male aggression — Analysis Code
 
 This repository contains the analysis code for the *Aggression-Associated Frame Ratio* (AAFR), a recording-level quantitative measure developed as a proxy for near-contact male–male aggression in *Drosophila melanogaster*.
 

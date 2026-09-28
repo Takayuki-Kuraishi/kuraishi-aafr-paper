@@ -2,7 +2,7 @@
 
 This document provides practical, step-by-step guidance for setting up the software environments used with the AAFR analysis pipeline described in:
 
-**Co-occurrence of rapid motion and close proximity as a proxy for Drosophila male aggression**
+**Co-occurrence of rapid motion and short inter-fly distance as a proxy for Drosophila male aggression**
 
 The workflow uses two separate software environments:
 
