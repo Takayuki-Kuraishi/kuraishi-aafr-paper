@@ -266,4 +266,5 @@ AAFR is therefore intended as a quantitative summary of the co-occurrence of mot
 - **Landmark.** Tracking uses one landmark, the **thoracic center**, for each fly. AAFR uses inter-fly distance rather than full-body posture.
 - **DeepLabCut.** DeepLabCut is used for coordinate estimation, not for aggression classification.
 - **Manual behavioral data.** Manual aggression counts are used to evaluate the association between AAFR and observed behavior; they are not used to calculate the AAFR value itself.
-- **Input data.** Per-video ΔI series, distance series, manual aggression counts, and AAFR summaries are deposited separately; see the paper's Data Availability statement.
+- **Processed data.** Per-video ΔI series, distance series, manual aggression counts, and AAFR summaries are available at Zenodo: https://doi.org/10.5281/zenodo.20698002
+- **Source videos.** The eight 10-min source videos underlying the 27 analyzed male-pair recordings, together with crop definitions and reconstruction information, will be available at Zenodo under the reserved DOI: https://doi.org/10.5281/zenodo.23030753
