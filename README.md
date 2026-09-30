@@ -267,4 +267,4 @@ AAFR is therefore intended as a quantitative summary of the co-occurrence of mot
 - **DeepLabCut.** DeepLabCut is used for coordinate estimation, not for aggression classification.
 - **Manual behavioral data.** Manual aggression counts are used to evaluate the association between AAFR and observed behavior; they are not used to calculate the AAFR value itself.
 - **Processed data.** Per-video ΔI series, distance series, manual aggression counts, and AAFR summaries are available at Zenodo: https://doi.org/10.5281/zenodo.20698002
-- **Source videos.** The eight 10-min source videos underlying the 27 analyzed male-pair recordings, together with crop definitions and reconstruction information, will be available at Zenodo under the reserved DOI: https://doi.org/10.5281/zenodo.23030753
+- **Source videos.** The eight 10-min source videos underlying the 27 analyzed male-pair recordings, together with crop definitions and reconstruction information, are available at Zenodo: https://doi.org/10.5281/zenodo.23030753
