@@ -38,7 +38,7 @@ For practical guidance on defining assay regions and cropping raw videos, see [`
 - Ubuntu 22.04
 - NVIDIA GeForce RTX 4090
 - NVIDIA driver 555, CUDA 11.8, cuDNN 8.6
-- Network: DLCRNet_ms5 with a ResNet-101 backbone
+- Network: ResNet-101 (`net_type: resnet_101`, `multi_stage: false`)
 - Multi-animal mode with identity tracking
 - One landmark (thoracic center) per fly
 - 200,000 training iterations
@@ -268,3 +268,4 @@ AAFR is therefore intended as a quantitative summary of the co-occurrence of mot
 - **Manual behavioral data.** Manual aggression counts are used to evaluate the association between AAFR and observed behavior; they are not used to calculate the AAFR value itself.
 - **Processed data.** Per-video ΔI series, distance series, manual aggression counts, and AAFR summaries are available at Zenodo: https://doi.org/10.5281/zenodo.20698002
 - **Source videos.** The eight 10-min source videos underlying the 27 analyzed male-pair recordings, together with crop definitions and reconstruction information, are available at Zenodo: https://doi.org/10.5281/zenodo.23030753
+- **DeepLabCut model.** The DeepLabCut project files, labeled training data, trained ResNet-101 model (snapshot 200000), and evaluation outputs used for inter-fly tracking are available at Zenodo: https://doi.org/10.5281/zenodo.23097273
