@@ -17,6 +17,12 @@ In the study accompanying this code, AAFR showed a positive association with the
 
 ---
 
+### Which workflow should I use?
+
+- **To reproduce the results reported in the paper:** use the archived processed data and study-specific crop manifest described below.
+- **To reprocess the archived source videos:** use the supplied crop manifest and reconstruction script.
+- **To apply AAFR to new recordings:** follow the general workflow in “Applying AAFR to new recordings” and verify setup-specific parameters.
+
 ## Software environment
 
 For step-by-step installation and environment setup instructions, including Docker and DeepLabCut, see [`SETUP.md`](SETUP.md).
@@ -238,18 +244,48 @@ Tracking performance should be assessed for the particular dataset and tracking 
 
 ---
 
-## Minimal reproduction
+## Reproducing the analyses reported in the paper
 
-1. Build the provided Docker image. The commands below are shown from the repository root for convenience.
-2. Preprocess videos with `run_video_pipeline.sh <input_dir>`.
-3. Generate ΔI with `run_koyama_analysis_batch.sh <frame_folders>`.
-4. Track the thoracic center of each fly using DeepLabCut and export coordinate CSVs.
-5. Generate inter-fly distances with `process_data.sh <input_csv_dir> [output_dir]` or directly with `process_csv.py <input_dir> <output_dir>`; the legacy `process_csv.py <YYMMDD>` mode is retained for compatibility.
+The published study can be reproduced using the archived study-specific datasets.
+
+**Do not use `video_processor.py` to recreate the 27 analyzed recordings from the archived source videos.** The exact crop regions used in the study are defined in the crop manifest deposited with the source videos.
+
+### A. Reproduce AAFR values and statistical analyses from the processed dataset
+
+The processed dataset containing the per-video ΔI series, inter-fly distance series, manual aggression counts, and AAFR summary is available at Zenodo (DOI: 10.5281/zenodo.20698002).
+
+Using these archived data, the reported AAFR values, correlation analyses, and bootstrap confidence intervals can be reproduced with:
+
+1. `compute_aafr.py`
+2. `aafr_validation_analysis.py`
+3. `bootstrap_correlation_ci.py`
+
+This is the shortest route for reproducing the numerical results reported in the manuscript.
+
+### B. Reconstruct the analyzed videos from the archived source videos
+
+The eight 10-min source videos underlying the 27 analyzed male-pair recordings are available at Zenodo (DOI: 10.5281/zenodo.23030753), together with:
+
+- the crop manifest specifying the exact assay-region coordinates used in the study,
+- video metadata and checksums, and
+- `reconstruct_crops.py`, which reconstructs the 320 × 320-pixel single-pair videos used for analysis.
+
+Use the supplied crop manifest and reconstruction script rather than `video_processor.py` when reproducing the published dataset.
+
+The DeepLabCut project files, labeled training data, trained model, and evaluation outputs used in the study are available separately at Zenodo (DOI: 10.5281/zenodo.23097273).
+
+## Applying AAFR to new recordings
+
+The following workflow is intended for applying AAFR to recordings other than the archived dataset used in the paper. Assay-region coordinates, spatial calibration, motion calibration, and tracking performance must be verified for the recording setup.
+
+1. Define the assay regions for the recording layout. See `VIDEO_CROPPING.md`.
+2. Preprocess videos with `run_video_pipeline.sh <input_dir>`, after adapting the assay-region coordinates as necessary.
+3. Generate ΔI with `run_koyama_analysis_batch.sh`.
+4. Track thoracic centers using DeepLabCut or another method providing suitable coordinates.
+5. Generate inter-fly distances with `process_data.sh`.
 6. Calculate AAFR with `compute_aafr.py`.
-7. Calculate the association with the manual behavioral reference using `aafr_validation_analysis.py`.
-8. Calculate bootstrap confidence intervals using `bootstrap_correlation_ci.py`.
 
----
+The coordinates currently defined in `video_processor.py` correspond to a specific multi-well recording layout and are **not universal assay coordinates**.
 
 ## Interpretation and limitations
 
