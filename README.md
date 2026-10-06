@@ -228,7 +228,7 @@ The value `xₜ = 45000` was established under the imaging conditions used in th
 
 The number of calibration recordings is **not intrinsically fixed at three**. When implementing the method under a substantially different imaging setup, enough non-aggressive control recordings should be used to establish or verify a stable threshold.
 
-Under unchanged imaging conditions, the same ΔI threshold should be applied across recordings and experimental conditions rather than recalibrated separately for each condition. Condition-specific normalization could obscure genuine differences in locomotor activity.
+Under unchanged imaging conditions, the same ΔI threshold should be applied across recordings and experimental conditions to maintain a consistent definition of high motion and allow direct comparison across conditions.
 
 ### Distance threshold and spatial calibration
 
